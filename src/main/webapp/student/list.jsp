@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Student Management</title>
+    <title>Bootstrap Table with Search Column Feature</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -15,9 +15,8 @@
     <style>
         body {
             color: #566787;
-            background: #f5f5f5;
-            font-family: 'Varela Round', sans-serif;
-            font-size: 13px;
+            background: #f7f5f2;
+            font-family: 'Roboto', sans-serif;
         }
         .table-responsive {
             margin: 30px 0;
@@ -30,10 +29,9 @@
             box-shadow: 0 1px 1px rgba(0,0,0,.05);
         }
         .table-title {
-            padding-bottom: 15px;
-            background: #299be4;
             color: #fff;
-            padding: 16px 30px;
+            background: #40b2cd;
+            padding: 16px 25px;
             margin: -20px -25px 10px;
             border-radius: 3px 3px 0 0;
         }
@@ -41,168 +39,126 @@
             margin: 5px 0 0;
             font-size: 24px;
         }
-        .table-title .btn {
-            color: #566787;
+        .search-box {
+            position: relative;
             float: right;
-            font-size: 13px;
+        }
+        .col-sm-7 {
+            margin-left: 883px;
+        }
+        .col-sm-7 a {
+            background: #40b2cd;
+            border-color: white;
+        }
+        .col-sm-7 a hover {
+            background: #068cac;
+            border-color: white;
+        }
+        .search-box .input-group {
+            min-width: 300px;
+            position: absolute;
+            right: 0;
+        }
+        .search-box .input-group-addon, .search-box input {
+            border-color: #ddd;
+            border-radius: 0;
+        }
+        .search-box input {
+            height: 34px;
+            padding-right: 35px;
+            background: #f4fcfd;
+            border: none;
+            border-radius: 2px !important;
+        }
+        .search-box input:focus {
             background: #fff;
+        }
+        .search-box input::placeholder {
+            font-style: italic;
+        }
+        .search-box .input-group-addon {
+            min-width: 35px;
             border: none;
-            min-width: 50px;
-            border-radius: 2px;
-            border: none;
-            outline: none !important;
-            margin-left: 10px;
+            background: transparent;
+            position: absolute;
+            right: 0;
+            z-index: 9;
+            padding: 6px 0;
         }
-        .table-title .btn:hover, .table-title .btn:focus {
-            color: #566787;
-            background: #f2f2f2;
+        .search-box i {
+            color: #a0a5b1;
+            font-size: 19px;
+            position: relative;
+            top: 2px;
         }
-        .table-title .btn i {
-            float: left;
-            font-size: 21px;
-            margin-right: 5px;
-        }
-        .table-title .btn span {
-            float: left;
-            margin-top: 2px;
+        table.table {
+            table-layout: fixed;
+            margin-top: 15px;
         }
         table.table tr th, table.table tr td {
             border-color: #e9e9e9;
-            padding: 12px 15px;
-            vertical-align: middle;
-        }
-        table.table tr th:first-child {
-            width: 60px;
-        }
-        table.table tr th:last-child {
-            width: 100px;
-        }
-        table.table-striped tbody tr:nth-of-type(odd) {
-            background-color: #fcfcfc;
-        }
-        table.table-striped.table-hover tbody tr:hover {
-            background: #f5f5f5;
         }
         table.table th i {
             font-size: 13px;
             margin: 0 5px;
             cursor: pointer;
         }
-        table.table td:last-child i {
-            opacity: 0.9;
-            font-size: 22px;
-            margin: 0 5px;
+        table.table th:first-child {
+            width: 60px;
+        }
+        table.table th:last-child {
+            width: 120px;
         }
         table.table td a {
-            font-weight: bold;
-            color: #566787;
+            color: #a0a5b1;
             display: inline-block;
-            text-decoration: none;
+            margin: 0 5px;
         }
-        table.table td a:hover {
-            color: #2196F3;
+        table.table td a.view {
+            color: #03A9F4;
         }
-        table.table td a.settings {
-            color: #2196F3;
+        table.table td a.edit {
+            color: #FFC107;
         }
         table.table td a.delete {
-            color: #F44336;
+            color: #E34724;
         }
         table.table td i {
             font-size: 19px;
         }
-        table.table .avatar {
-            border-radius: 50%;
-            vertical-align: middle;
-            margin-right: 10px;
-        }
-        .status {
-            font-size: 30px;
-            margin: 2px 2px 0 0;
-            display: inline-block;
-            vertical-align: middle;
-            line-height: 10px;
-        }
-        .text-success {
-            color: #10c469;
-        }
-        .text-info {
-            color: #62c9e8;
-        }
-        .text-warning {
-            color: #FFC107;
-        }
-        .text-danger {
-            color: #ff5b5b;
-        }
-        .pagination {
-            float: right;
-            margin: 0 0 5px;
-        }
-        .pagination li a {
-            border: none;
-            font-size: 13px;
-            min-width: 30px;
-            min-height: 30px;
-            color: #999;
-            margin: 0 2px;
-            line-height: 30px;
-            border-radius: 2px !important;
-            text-align: center;
-            padding: 0 6px;
-        }
-        .pagination li a:hover {
-            color: #666;
-        }
-        .pagination li.active a, .pagination li.active a.page-link {
-            background: #03A9F4;
-        }
-        .pagination li.active a:hover {
-            background: #0397d6;
-        }
-        .pagination li.disabled i {
-            color: #ccc;
-        }
-        .pagination li i {
-            font-size: 16px;
-            padding-top: 6px
-        }
-        .hint-text {
-            float: left;
-            margin-top: 10px;
-            font-size: 13px;
-        }
     </style>
     <script>
         $(document).ready(function(){
+            // Activate tooltips
             $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
 </head>
 <body>
-<div class="container-xl">
+<div class="container-lg">
     <div class="table-responsive">
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-5">
-                        <h2>Student <b>Management</b></h2>
+                    <div class="col-sm-6">
+                        <h2>Student Management</h2>
                     </div>
-                    <div class="col-sm-7">
-                        <a href="/students?action=create" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New User</span></a>
-
-                    </div>
-                    <div>
+                    <div class="col-sm-6">
                         <form action="/students?action=find" method="post">
-                            <input type="text" name="search" id="search" placeholder="country">
-                            <input type="submit" value="Search">
+                        <div class="search-box">
+                            <div class="input-group">
+                                    <input type="text" name="search" id="search" class="form-control" placeholder="Search by Name">
+                                    <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+                            </div>
+                        </div>
                         </form>
                     </div>
+<%--                    <div class="col-sm-7">--%>
+<%--                        <a href="/students?action=create" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New User</span></a>--%>
+<%--                    </div>--%>
                 </div>
-
             </div>
-
-            <table class="table table-striped table-hover">
+            <table class="table table-striped">
                 <thead>
                 <tr>
                     <th>Id</th>
@@ -214,25 +170,29 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${students}" var="student">
-                    <tr>
-                        <td>${student.id}</td>
-                        <td>${student.name}</td>
-                        <td>${student.dateOfBirth}</td>
-                        <td>${student.email}</td>
-                        <td>${student.address}</td>
+                    <c:forEach items="${students}" var="student">
+                        <tr>
+                            <td>${student.id}</td>
+                            <td>${student.name}</td>
+                            <td>${student.dateOfBirth}</td>
+                            <td>${student.email}</td>
+                            <td>${student.address}</td>
 
-                        <td>
-                            <a href="/students?action=edit&id=${student.id}" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">&#xE8B8;</i></a>
-                            <a href="/students?action=delete&id=${student.id}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
-                        </td>
-                    </tr>
-
-                </c:forEach>
-
+                            <td>
+                                <a href="/students?action=edit&id=${student.id}" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">&#xE8B8;</i></a>
+                                <a href="/students?action=delete&id=${student.id}" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
+                            </td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
-
+            <div>
+                <div class="row">
+                    <div class="col-sm-7">
+                        <a href="/students?action=create" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New Student</span></a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
